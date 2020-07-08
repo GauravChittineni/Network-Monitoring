@@ -9,7 +9,9 @@ As per the mail sent i should be creating an automation script for managing all 
 
 1. scanning the network for devices:
    -open the terminal and create an scanner.sh file and add the below code into it and execute it.
+
 ------------------start of the code Scanner.sh----------------------
+
 #!/bin/sh
 
 : ${1?"Usage: $0 ip subnet to scan. eg '192.168.1.'"}
@@ -45,7 +47,9 @@ for JOB in $(jobs -p); do wait "${JOB}"; done
 ip neighbour | \
     awk 'tolower($0) ~ /reachable|stale|delay|probe/{printf ("%5s\t%s\n", $1, $5)}' | \
       sort --version-sort --unique 
+
 ----------------------- End of code scanner.sh------------------------------------
+
    -enter command sudo bash scanner.sh 192.168.1.
    -list of ip addresses can be seen here when executed.
    -enter command nano log.log
@@ -54,7 +58,9 @@ ip neighbour | \
    -open the terminal and create an snapshotcapture.sh file and place the below code into it and execute it.
     -Screencapture is a command line tool that is used to capture the snapshots of the devices for given time intervals. 
     The tool can be installed on the command-line using apt-get install screencapture using sudo privileges.
+
 -----------------------------------Start of the code Snapshotcapture.sh ----------------------------------
+
    #!/usr/bin/env bash
 
 set -e
@@ -108,11 +114,15 @@ while [[ 1 ]];do
 done
 
 exit 0 
+
 ----------------------------- End of the Code snapshotcapture.sh ------------------------------------------
+
    -snapshot will be captured with automatically generated timestamp.
 3. rolling back of devices:
    -open the terminal and create rollback.sh file and add the below code into it and execute it.
+
 ------------------------------Start of the code Rollback.sh---------------------------------------
+
    #!/usr/bin/env bash
 
 # the path containing the logs of the snapshots
@@ -150,5 +160,8 @@ echo -e "\n> New post snapshot with number ${snapshot_}."
 echo "> Running command \"${cmd}\"."
 snapshot_=$(snapper create --command "${cmd}" --print-number --cleanup-algorithm=number --description="${cmd}" | tail -1)
 echo -e "\n> New pre-post snapshot with numbers ${snapshot_}."
+
 --------------------------------- End of the code Rollback.sh-----------------------------
+
    -the devices are rolled back into the previous snapshot.
+
