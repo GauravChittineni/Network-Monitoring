@@ -11,7 +11,6 @@ As per the mail sent i should be creating an automation script for managing all 
    -open the terminal and create an scanner.sh file and add the below code into it and execute it.
 
 ------------------start of the code Scanner.sh----------------------
-
 #!/bin/sh
 
 : ${1?"Usage: $0 ip subnet to scan. eg '192.168.1.'"}
@@ -46,7 +45,7 @@ for JOB in $(jobs -p); do wait "${JOB}"; done
 
 ip neighbour | \
     awk 'tolower($0) ~ /reachable|stale|delay|probe/{printf ("%5s\t%s\n", $1, $5)}' | \
-      sort --version-sort --unique 
+      sort --version-sort --unique
 
 ----------------------- End of code scanner.sh------------------------------------
 
